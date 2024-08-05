@@ -65,3 +65,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "faraday", "~> 2.10"
+
+gem "bootstrap", "~> 5.3"
+
+gem "sassc-rails", "~> 2.1"
