@@ -1,0 +1,157 @@
+<div class="container">
+
+  <div class="d-flex justify-content-center">
+    <%= image_tag 'owen.webp', alt: 'Owen Wilson', class: 'img-fluid' %>
+  </div>
+  <div class="row">
+
+    <div class="col-lg-6 col-12 my-4">
+      <h3>All wow movies </h3>
+      <div class="btn-group mb-3">
+        <a href="?sort_movies=name" class="btn btn-outline-primary">Sort by Movie's Name</a>
+        <a href="?sort_movies=release_date" class="btn btn-outline-primary">Sort by Release Date</a>
+        <a href="?sort_movies=total_wows_in_movie" class="btn btn-outline-primary">Sort by Total Wows</a>
+      </div>
+      <div class="list-container" style="height: 70vh; overflow-y: auto;">
+        <ul class="list-group">
+          <% @movies.each_pair do |name, info| %>
+          <li class="d-flex justify-content-around list-group-item list-group-item-secondary">
+            <div class="my-4">
+              <strong><%= name %></strong>
+              <ul class="list-unstyled">
+                <li>Release Date: <%= info['release_date'] %></li>
+                <li>Total Wows: <%= info['total_wows_in_movie'] %></li>
+              </ul>
+
+            </div>
+            <div class="my-4">
+              <img src="<%= info['poster'] %>" class="img-fluid img-thumbnail my-2" style="max-width: 150px; max-height: 200px;"> 
+            </div>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="col-md-6 col-12 my-4">
+      <h3>All wow directors </h3>
+      <div class="btn-group mb-3">
+        <a href="?sort_director=name" class="btn btn-outline-primary">Sort by Director's Name</a>
+        <a href="?sort_director=total_movies" class="btn btn-outline-primary">Sort by Total movies</a>
+        <a href="?sort_director=total_wows" class="btn btn-outline-primary">Sort by Total Wows</a>
+      </div>
+      <div class="list-container" style="height: 70vh; overflow-y: auto;">
+        <ul class="list-group">
+          <% @directors.each_pair do |name, info| %>
+            <li class="list-group-item list-group-item-secondary">
+              <strong><%= name %></strong>
+              <ul class="list-unstyled">
+                <li>Total movies: <%= info['total_movies'] %></li>
+                <li>Total Wows: <%= info['total_wows'] %></li>
+                <li>Movies:</li>
+                <li>
+                  <% info['movies'].each do |movie| %>
+                    <div class="d-flex justify-content-around">
+                      <div class="my-4">
+                        <strong><%= movie['name'] %></strong>
+                        <ul class="list-unstyled">
+                          <li>Release Date: <%= movie['release_date'] %></li>
+                          <li>Total Wows: <%= movie['total_wows_in_movie'] %></li>
+                        </ul>
+
+                      </div>
+                      <div class="my-4">
+                        <img src="<%= movie['poster'] %>" class="img-fluid img-thumbnail my-2" style="max-width: 100px; max-height: 150px;"> 
+                      </div>
+                    </div>
+                  <% end %>
+                </li>
+              </ul>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="my-4">
+    <h3>The longest wow movie</h3>
+      <div class="d-flex justify-content-around">
+        <div class="my-4">
+          <strong><%= @longest_movie[0] %></strong>
+          <ul class="list-unstyled">
+            <li>Director Name: <%= @longest_movie[1]['director'] %></li>
+            <li>Duration: <%= @longest_movie[1]['movie_duration'] %></li>
+            <li>Release Date: <%= @longest_movie[1]['release_date'] %></li>
+            <li>Total Wows: <%= @longest_movie[1]['total_wows_in_movie'] %></li>
+          </ul>
+
+        </div>
+        <div class="my-4">
+          <img src="<%= @longest_movie[1]['poster'] %>" class="img-fluid img-thumbnail my-2" style="max-width: 150px; max-height: 200px;"> 
+        </div>
+      </div>
+  </div>
+
+  <div class="my-4">
+    <h3>First and last wow</h3>
+    <div> First wow </div>
+    <div class="d-flex justify-content-around">
+        <div class="my-4">
+          <strong><%= @first_and_last_wow['first_wow']['movie'] %></strong>
+          <ul class="list-unstyled">
+            <li>Director Name: <%= @first_and_last_wow['first_wow']['director'] %></li>
+            <li>Time of Wow: <%= @first_and_last_wow['first_wow']['timestamp'] %></li>
+            <li>Duration: <%= @first_and_last_wow['first_wow']['movie_duration'] %></li>
+            <li>Release Date: <%= @first_and_last_wow['first_wow']['release_date'] %></li>
+            <li>Total Wows: <%= @first_and_last_wow['first_wow']['total_wows_in_movie'] %></li>
+          </ul>
+
+        </div>
+        <div class="my-4">
+          <img src="<%= @first_and_last_wow['first_wow']['poster'] %>" class="img-fluid img-thumbnail my-2" style="max-width: 150px; max-height: 200px;"> 
+        </div>
+      </div>
+    <div>Last wow</div>
+    <div class="d-flex justify-content-around">
+        <div class="my-4">
+          <strong><%= @first_and_last_wow['last_wow']['movie'] %></strong>
+          <ul class="list-unstyled">
+            <li>Director Name: <%= @first_and_last_wow['last_wow']['director'] %></li>
+            <li>Time of Wow: <%= @first_and_last_wow['last_wow']['timestamp'] %></li>
+            <li>Duration: <%= @first_and_last_wow['last_wow']['movie_duration'] %></li>
+            <li>Release Date: <%= @first_and_last_wow['last_wow']['release_date'] %></li>
+            <li>Total Wows: <%= @first_and_last_wow['last_wow']['total_wows_in_movie'] %></li>
+          </ul>
+
+        </div>
+        <div class="my-4">
+          <img src="<%= @longest_movie[1]['poster'] %>" class="img-fluid img-thumbnail my-2" style="max-width: 150px; max-height: 200px;"> 
+        </div>
+      </div>
+  </div>
+
+  <div class="my-4">
+    <h3>The wow median</h3>
+    <ul class="list-group">
+      <% @median_wow.each do |wow| %>
+        <li class="d-flex justify-content-around list-group-item list-group-item-secondary">
+          <div class="my-4">
+            <strong><%= wow['movie'] %></strong>
+            <ul class="list-unstyled">
+              <li>Director Name: <%=wow['director'] %></li>
+              <li>Duration: <%= wow['movie_duration'] %></li>
+              <li>Release Date: <%= wow['release_date'] %></li>
+              <li>Total Wows: <%= wow['total_wows_in_movie'] %></li>
+            </ul>
+
+          </div>
+          <div class="my-4">
+            <img src="<%= wow['poster'] %>" class="img-fluid img-thumbnail my-2" style="max-width: 150px; max-height: 200px;"> 
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
